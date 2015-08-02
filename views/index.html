@@ -3,9 +3,29 @@
   <head>
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/css/style.css' />
+    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
     <h1>{{ title }}asdfasdfasdf</h1>
     <p>Welcome to {{ title }}</p>
+    <ul id="messages"></ul>
+    <input type="text" id="input">
+    <button id="send">发送</button>
+    <script>
+    	var socket = io();
+    	      document.getElementById("send").onclick = function(){
+    	      	var oInput = document.getElementById("input");
+        		socket.emit('chat message', oInput.value);
+    	        oInput.value = ''
+    	        return false;
+    	      };
+    	    
+    	      socket.on('chat message', function(msg){
+    	      	var oLi = document.createElement("li");
+    	      	oLi.innerHTML = msg;
+    	      	document.getElementById("messages").appendChild(oLi);
+    	      });
+
+    </script>
   </body>
 </html>
