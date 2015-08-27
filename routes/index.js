@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
+var User = require("../model/user");
+
 /* GET home page. */
 router.get('/', function(req, res) {
 	/*var conn = mongoose.connect('mongodb://localhost/chatRoom');
@@ -30,7 +31,20 @@ router.get('/', function(req, res) {
 	                }
 	                console.log('save success'); 
 	            });*/
-  	res.render('index', { title: 'Express' });
+
+    var user = new User({
+        name: 'adfasdf'
+    });
+    /*user.save(function(error) {
+        console.log(error)
+
+    });*/
+    User.find({}).exec(function (err, user) {
+        console.log(user)
+        res.render('index', { title: user[0].name });
+    });
+
+
 });
 
 module.exports = router;

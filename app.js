@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var swig  = require('swig');
-var compass = require('node-compass');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
@@ -30,16 +29,9 @@ app.use(session({
         db: 'sessiondb'
     })
 }));
-//sass
 
-/*app.use(
-    compass({
-        sass: __dirname + '/static/sass/',
-        css: __dirname + '/static/css/',
-        mode: 'expanded'  //expanded, nested, compressed or compact.
-    })
-);*/
-console.log('------------------------------------------------')
+var mongoose = require("mongoose");
+var conn = mongoose.connect('mongodb://localhost/chatRoom')
 //static dir
 console.log(path.join(__dirname, 'static'))
 app.use(express.static(path.join(__dirname, 'static')));
