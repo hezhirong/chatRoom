@@ -1,0 +1,24 @@
+/* line 3, ../sass/style.scss */
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+/* line 8, ../sass/style.scss */
+h1 {
+  color: red;
+}
+
+/* line 11, ../sass/style.scss */
+a {
+  color: #00B7FF;
+}
+/* line 13, ../sass/style.scss */
+a:hover {
+  color: #00B7FF;
+}
+
+/* line 17, ../sass/style.scss */
+h1 {
+  color: green;
+}

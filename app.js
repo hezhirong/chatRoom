@@ -6,10 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var swig  = require('swig');
 var compass = require('node-compass');
-
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
@@ -23,18 +21,31 @@ app.set('view engine', 'html');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+//cokkie
 app.use(cookieParser());
-app.use(
+//session mongo
+app.use(session({
+    secret: 'secretkey',
+    store: new MongoStore({
+        db: 'sessiondb'
+    })
+}));
+//sass
+
+/*app.use(
     compass({
-        sass: __dirname + '/public/sass/',
-        css: __dirname + '/public/css/',
+        sass: __dirname + '/static/sass/',
+        css: __dirname + '/static/css/',
         mode: 'expanded'  //expanded, nested, compressed or compact.
     })
-)
-app.use(express.static(path.join(__dirname, 'public')));
+);*/
+console.log('------------------------------------------------')
+//static dir
+console.log(path.join(__dirname, 'static'))
+app.use(express.static(path.join(__dirname, 'static')));
 
-app.use('/', routes);
-app.use('/users', users);
+//route
+require('./route')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
